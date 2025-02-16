@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Vaga</title>
+    <style>
+        /* Resetando margens e padding */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Definindo a cor de fundo e a fonte para todo o documento */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            padding: 20px;
+        }
+
+        /* Estilo do título */
+        #titulo {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #2a2a2a;
+        }
+
+        /* Descrição do sistema */
+        #descricao {
+            text-align: center;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            color: #555;
+        }
+
+        /* Estilo do formulário */
+        #ficha {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #444;
+        }
+
+        /* Estilo dos campos do formulário */
+        label {
+            font-size: 1em;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="time"],
+        input[type="number"],
+        textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="tel"]:focus,
+        input[type="time"]:focus,
+        input[type="number"]:focus,
+        textarea:focus {
+            border-color: #6c63ff;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        /* Estilo dos botões e elementos interativos */
+        button {
+            background-color: #6c63ff;
+            color: #fff;
+            border: none;
+            padding: 12px 20px;
+            font-size: 1em;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: block;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #5a54e0;
+        }
+
+        /* Estilo dos campos de seleção */
+        fieldset {
+            margin-bottom: 20px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        legend {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        label input {
+            margin-right: 10px;
+        }
+
+        hr {
+            border: 1px solid #eee;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 id="titulo">SCVCIA</h1>
+        <div id="descricao">
+            <p>
+                Bem-vindo ao SCVCIA, sistema para a captação de vagas de trabalho em Cianorte. 
+                Nosso objetivo é facilitar o processo de captação de vagas.
+            </p>
+        </div>
+    </header>
+
+    <main>
+        <section id="ficha">
+            <form id="formVaga" onsubmit="gerarArquivos(event)">
+                <h2>Ficha de Vaga</h2>
+
+                <!-- Campos do formulário -->
+                <label for="nomeEmpresa">Nome da Empresa:</label>
+                <input type="text" id="nomeEmpresa" name="nomeEmpresa"/>
+
+                <label for="cnpj">CNPJ:</label>
+                <input type="text" id="cnpj" name="cnpj" placeholder="Digite o CNPJ (sem pontos e traços)"/>
+                
+                <hr>
+                
+                <label for="responsavel">Responsável pela Vaga:</label>
+                <input type="text" id="responsavel" name="responsavel" />
+
+                <label for="telefoneResponsavel">Telefone do Responsável:</label>
+                <input type="tel" id="telefoneResponsavel" name="telefoneResponsavel"  placeholder="(XX) XXXX-XXXX"/>
+                
+                <hr>
+                
+                <label for="endereco">Endereço:</label>
+                <input type="text" id="endereco" name="endereco"/>
+                
+                <label for="referencia">Ponto de Referência:</label>
+                <input type="text" id="referencia" name="referencia"/>
+                
+                <hr>
+
+                <fieldset>
+                    <legend>Forma de Contato:</legend>
+                    <label for="contatoEmail">
+                        <input type="radio" value="email" name="contato" id="contatoEmail"> E-mail
+                    </label>
+                    <label for="contatoTelefone">
+                        <input type="radio" value="telefone" name="contato" id="contatoTelefone"> Telefone
+                    </label>
+                    <label for="contatoPresencial">
+                        <input type="radio" value="presencial" name="contato" id="contatoPresencial"> Presencial
+                    </label>
+                </fieldset>
+
+                <hr>
+
+                <fieldset>
+                    <legend>Forma de Envio de Currículo:</legend>
+                    <label for="curriculoEmail">
+                        <input type="radio" value="email" name="curriculo" id="curriculoEmail"> E-mail
+                    </label>
+                    <label for="curriculoWhatsapp">
+                        <input type="radio" value="whatsapp" name="curriculo" id="curriculoWhatsapp"> WhatsApp
+                    </label>
+                    <label for="curriculoPresencial">
+                        <input type="radio" value="presencial" name="curriculo" id="curriculoPresencial"> Presencial
+                    </label>
+                </fieldset>
+
+                <label for="emailE">E-mail:</label>
+                <input type="email" id="emailE" name="emailE"/>
+
+                <label for="whatsappE">WhatsApp:</label>
+                <input type="tel" id="whatsappE" name="whatsappE"  placeholder="(XX) XXXX-XXXX"/>
+
+                <label for="horario">Horário para Entregar Currículo:</label>
+                <input type="time" id="horario" name="horario"/>
+                
+                <hr>
+                
+                <label for="vaga">Vaga:</label>
+                <input type="text" id="vaga" name="vaga"/>
+                
+                <label for="numeroVaga">N° da Vaga:</label>
+                <input type="number" id="numeroVaga" name="numeroVaga"/>
+                
+                <br>
+
+                <label for="requisitos">Requisitos:</label>
+                <textarea id="requisitos" name="requisitos" cols="80" rows="6" style="resize: none;"></textarea>
+
+                <br>
+                
+                <button type="submit">Cadastrar Vaga</button>
+            </form>
+        </section>
+    </main>
+
+    <script>
+        function gerarArquivos(event) {
+            event.preventDefault(); // Evita o envio do formulário
+
+            // Captura os valores dos campos
+            const vaga = document.getElementById('vaga').value;
+            const numeroVaga = document.getElementById('numeroVaga').value;
+            const requisitos = document.getElementById('requisitos').value;
+            const nomeEmpresa = document.getElementById('nomeEmpresa').value;
+            const cnpj = document.getElementById('cnpj').value;
+            const responsavel = document.getElementById('responsavel').value;
+            const telefoneResponsavel = document.getElementById('telefoneResponsavel').value;
+            const endereco = document.getElementById('endereco').value;
+            const referencia = document.getElementById('referencia').value;
+            const contato = document.querySelector('input[name="contato"]:checked')?.value;
+            const curriculo = document.querySelector('input[name="curriculo"]:checked')?.value;
+            const emailE = document.getElementById('emailE').value;
+            const whatsappE = document.getElementById('whatsappE').value;
+            const horario = document.getElementById('horario').value;
+
+            // Conteúdo para o arquivo "_Cadastro"
+            const conteudoCadastro = `
+                Vaga: ${vaga}
+                N° da Vaga: ${numeroVaga}
+                Requisitos:
+                ${requisitos}
+
+                Nome da Empresa: ${nomeEmpresa}
+                CNPJ: ${cnpj}
+                Responsável pela Vaga: ${responsavel}
+                Telefone do Responsável: ${telefoneResponsavel}
+                Endereço: ${endereco}
+                Ponto de Referência: ${referencia}
+                Forma de Contato: ${contato}
+                Forma de Envio de Currículo: ${curriculo}
+                E-mail para Contato: ${emailE}
+                WhatsApp para Contato: ${whatsappE}
+                Horário para Entregar Currículo: ${horario}
+            `;
+            // Criar o arquivo "_Cadastro"
+            const blobCadastro = new Blob([conteudoCadastro], { type: 'text/plain' });
+            const linkCadastro = document.createElement('a');
+            linkCadastro.href = URL.createObjectURL(blobCadastro);
+            linkCadastro.download = `${vaga}_Cadastro.txt`;
+            linkCadastro.click();
+
+            // Conteúdo para o arquivo "_Controle"
+            const conteudoControle = `
+                Vaga: ${vaga}
+                N° da Vaga: ${numeroVaga}
+                Requisitos:
+                ${requisitos}
+            `;
+            // Criar o arquivo "_Controle"
+            const blobControle = new Blob([conteudoControle], { type: 'text/plain' });
+            const linkControle = document.createElement('a');
+            linkControle.href = URL.createObjectURL(blobControle);
+            linkControle.download = `${vaga}_Controle.txt`;
+            linkControle.click();
+        }
+    </script>
+</body>
+</html>
